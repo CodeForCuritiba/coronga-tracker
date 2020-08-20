@@ -34,4 +34,10 @@ Um sistema central que armazenará os dados cedidos voluntariamente pelas pessoa
 O sistema central deverá ter um mecanismo de confirmação da veracidade dos dados compartilhados.   
 Quando solicitado pelos usuários, o sistema central permitirá o cruzamento de informações e informará a possibilidade de risco de contaminação.   
 
+### Acesso   
+O aplicativo está disponível neste endereço:
+
+[Covid-Tracker](https://master.d1nbtlicy20gae.amplifyapp.com/)
+
+
 
