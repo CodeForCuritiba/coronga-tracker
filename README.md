@@ -1,4 +1,4 @@
-# covid-tracker
+# coronga-tracker
 
 ## Problema
 Durante um processo de retomada de atividades e diminuição do isolamento social, as pessoas se sentirão mais seguras com a possibilidade de realizar testes de contaminação pela COVID19. Realizar testes o mais cedo possível tem 2 benefícios:    
