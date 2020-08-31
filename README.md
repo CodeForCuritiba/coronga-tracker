@@ -1,3 +1,5 @@
+![Logo Coronga Tracker e Code For Curitiba](/assets/header.jpg)
+
 # coronga-tracker
 
 ## Problema
