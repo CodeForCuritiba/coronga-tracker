@@ -1,0 +1,19 @@
+{
+  "name": "coronga-dynamo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "covid-19",
+    "dynamo"
+  ],
+  "author": "abreums",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.742.0",
+    "dynamodb-geo": "^0.4.0"
+  }
+}
