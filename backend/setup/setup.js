@@ -56,5 +56,3 @@ ddb.createTable(createTableInput).promise()
   .then(function () { console.log('Tabela corongaTracker criada!') })
 
 
-
-
