@@ -1,4 +1,4 @@
-//* Copyright 2020 abreums
+/* Copyright 2020 abreums
 
 Permission to use, copy, modify, and/or distribute this software for any purpose 
 with or without fee is hereby granted, provided that the above copyright notice 
@@ -12,13 +12,12 @@ DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS 
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-'use strict'
-
+'use strict';
 // Este script cria a tabela no banco DynamoDB
 // O primeio parâmetro será a região AWS onde o banco será criado.
 // ex. node ./setup.js sa-east-1
 
-const ddbGeo = require('dynamodb-geo')
+const ddbGeo = require('dynamodb-geo');
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
 
@@ -31,17 +30,17 @@ AWS.config.update({
 // uncomment this to PRD
 // AWS.config.update({region: process.argv[2]})
 
-const ddb = new AWS.DynamoDB() 
+const ddb = new AWS.DynamoDB(); 
 
 // Parâmetros da tabela DynamoDB
-const DDB_TABLENAME = 'corongaTracker'
-const config = new ddbGeo.GeoDataManagerConfiguration(ddb, DDB_TABLENAME)
-config.hashKeyLength = 5
+const DDB_TABLENAME = 'corongaTracker';
+const config = new ddbGeo.GeoDataManagerConfiguration(ddb, DDB_TABLENAME);
+config.hashKeyLength = 5;
 // Instantiate the table manager
 const corongaManager = new ddbGeo.GeoDataManager(config);
 
 // Use GeoTableUtil para ajudar a definir a tabela com parâmetros geográficos:
-const createTableInput = ddbGeo.GeoTableUtil.getCreateTableRequest(config)
+const createTableInput = ddbGeo.GeoTableUtil.getCreateTableRequest(config);
 
 // Tweak the schema as desired
 createTableInput.ProvisionedThroughput.ReadCapacityUnits = 2;
@@ -70,4 +69,5 @@ ddb.createTable(createTableInput).promise()
   console.log(`Falha na criação da tabela: ${err}`);
 }
 
+console.log('setup - end');
 
