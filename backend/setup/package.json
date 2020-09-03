@@ -1,7 +1,6 @@
 {
   "name": "coronga-dynamo-setup",
   "version": "1.0.0",
-  "description": "",
   "main": "setup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,7 +21,8 @@
   },
   "homepage": "https://github.com/Abreums/coronga-tracker#readme",
   "dependencies": {
-    "aws-sdk": "^2.742.0",
+    "aws-sdk": "^2.746.0",
     "dynamodb-geo": "^0.4.0"
-  }
+  },
+  "description": ""
 }
