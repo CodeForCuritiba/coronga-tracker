@@ -9,7 +9,6 @@ const Header = ({ siteTitle = `` }: IHeader) => (
   <header
     style={{
       background: `#F05600`,
-      marginBottom: `1.45rem`,
     }}
   >
     <div

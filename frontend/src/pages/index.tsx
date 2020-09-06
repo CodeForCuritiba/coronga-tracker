@@ -58,7 +58,7 @@ const IndexPage: React.FC = () => {
   return (
   <Layout>
     <SEO title="Coronga Tracker" />
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+    <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
     <button onClick={() => sendGeoLocation()} >Teste</button>
         {timeStamp + " "}
         {latitude + " "} {longitude}

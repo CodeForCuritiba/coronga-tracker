@@ -27,16 +27,24 @@ const Layout: React.FC = ({ children }:ILayout) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-          maxHeight: `100vh`
+          padding: `0`,
+          maxHeight: `100vh`,
+          width:`100vw`,
+          display: `flex`,
+          flexDirection: `column`
         }}
       >
-        <main>{children}</main>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <main
+        style={{
+          flex: 1,
+          overflowY: `auto`,
+          
+        }}
+        >{children}</main>
         <footer>
         © {new Date().getFullYear()}, Feito com 💚 no
           {` `}
