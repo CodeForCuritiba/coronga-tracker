@@ -595,13 +595,3 @@ pre tt:after {
     font-size: 100%;
   }
 }
-
-footer {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-}
