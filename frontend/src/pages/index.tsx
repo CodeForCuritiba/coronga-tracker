@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
-// import { Link } from "gatsby"
+import { Link, withPrefix } from "gatsby"
+import { Helmet } from "react-helmet"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -26,40 +27,42 @@ const IndexPage: React.FC = () => {
     .catch((err) => console.error(err));
     alert(data)
   }
+  async function getLocation() {
+    alert("Teste")
+    return new Promise((resolve, reject) => {
 
-  useEffect(()=>{
-    
-    async function getLocation() {
-      
-      return new Promise((resolve, reject) => {
+      if(!("geolocation" in navigator)) {
+        reject(new Error('Geolocation is not available.'));
+      }
 
-        if(!("geolocation" in navigator)) {
-          reject(new Error('Geolocation is not available.'));
-        }
-
-        navigator.geolocation.getCurrentPosition(pos => {
-          const { timestamp, coords: { latitude, longitude, accuracy, altitude} } = pos;
-          resolve(pos);
-          setTimeStamp(timestamp);
-          setLatitude(latitude);
-          setLongitude(longitude);
-          // console.log(latitude, longitude);
-        }, err => {
-          reject(err);
-        });
-
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { timestamp, coords: { latitude, longitude, accuracy, altitude} } = pos;
+        resolve(pos);
+        setTimeStamp(timestamp);
+        setLatitude(latitude);
+        setLongitude(longitude);
+        // console.log(latitude, longitude);
+      }, err => {
+        reject(err);
       });
-    }
 
-    getLocation();
+    });
+  }
 
-  },[]);
+  // useEffect(()=>{}
+
+
+  // },[]);
 
   return (
   <Layout>
+    <Helmet>
+      <script src="getGeoLocation.js" type="text/javascript"></script>
+    </Helmet> 
     <SEO title="Coronga Tracker" />
     <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
-    <button onClick={() => sendGeoLocation()} >Teste</button>
+    <a href="javascript:getLocation()">Test</a>
+    {/* <button onClick={getLocation} >Teste</button> */}
         {timeStamp + " "}
         {latitude + " "} {longitude}
       <Image />
