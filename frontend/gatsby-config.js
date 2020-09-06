@@ -37,5 +37,17 @@ module.exports = {
         async: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: '/handleDB.js', // Change to the script filename
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: '/handleBehaviors.js', // Change to the script filename
+      },
+    },
   ],
 }

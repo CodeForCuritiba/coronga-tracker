@@ -58,13 +58,14 @@ const IndexPage: React.FC = () => {
   <Layout>
     <Helmet>
       <script src="getGeoLocation.js" type="text/javascript"></script>
+      <script src="handleDB.js" type="text/javascript"></script>
+      <script src="handleBehaviors.js" type="text/javascript"></script>
     </Helmet> 
     <SEO title="Coronga Tracker" />
     <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
     <a href="javascript:getLocation()">Test</a>
-    {/* <button onClick={getLocation} >Teste</button> */}
-        {timeStamp + " "}
-        {latitude + " "} {longitude}
+      <button id="js-getLocation" >Get Location</button>
+      <div id="js-render-location"></div>
       <Image />
     </div>
     {/* <Link to="/page-2/">Go to page 2</Link> <br />
