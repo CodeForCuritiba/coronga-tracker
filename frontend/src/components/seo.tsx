@@ -14,9 +14,9 @@ interface IMeta {
   name: string; content: any; property?: undefined;
 }
 interface ISEO {
-  description: string;
-  lang: string;
-  meta: [IMeta];
+  description?: string;
+  lang?: string;
+  meta?: [IMeta];
   title: string;
 }
 
