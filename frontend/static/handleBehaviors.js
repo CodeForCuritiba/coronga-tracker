@@ -1,8 +1,8 @@
-(function(){
-  const btnGetLocation = document.getElementById('js-getLocation');
+
   function addEventListeners() {
-    console.log("addEventListeners");
-    btnGetLocation.click(function(){getLocation()});
+    console.log("...adding EventListeners");
+    document.getElementById("js-getLocation").addEventListener("click", getLocation);
+    document.getElementById("js-openDB").addEventListener("click", openDb);
   }
-  addEventListeners();
-})();
+
+  window.onload = addEventListeners();
