@@ -3,6 +3,8 @@ module.exports = {
     title: `Coronga Tracker`,
     description: `Descrição do coronga tracker.`,
     author: `@codeforcuritiba`,
+    twitterHandle: '@codeforcuritiba',
+		url: 'https://corongatracker.org',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
