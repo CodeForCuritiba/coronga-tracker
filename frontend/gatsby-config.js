@@ -33,20 +33,21 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        src: '/getGeoLocation.js', // Change to the script filename
+        src: 'getGeoLocation.js', // Change to the script filename
         async: true,
       },
     },
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        src: '/handleDB.js', // Change to the script filename
+        src: 'handleDB.js', // Change to the script filename
+        async: true,
       },
     },
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        src: '/handleBehaviors.js', // Change to the script filename
+        src: 'handleBehaviors.js', // Change to the script filename
       },
     },
   ],
