@@ -23,31 +23,30 @@ var db;
 // Used to keep track of which view is displayed to avoid uselessly reloading it
 var current_view_pub_key;
 
-(function() {
 function openDb() {
-console.log("openDb ...");
-var req = indexedDB.open(DB_NAME, DB_VERSION);
-req.onsuccess = function (evt) {
-  // Better use "this" than "req" to get the result to avoid problems with
-  // garbage collection.
-  // db = req.result;
-  db = this.result;
-  console.log("openDb DONE");
-};
-req.onerror = function (evt) {
-  console.error("openDb:", evt.target.errorCode);
-};
+  console.log("openDb ...");
+  var req = indexedDB.open(DB_NAME, DB_VERSION);
+  req.onsuccess = function (evt) {
+    // Better use "this" than "req" to get the result to avoid problems with
+    // garbage collection.
+    // db = req.result;
+    db = this.result;
+    console.log("openDb DONE");
+  };
+  req.onerror = function (evt) {
+    console.error("openDb:", evt.target.errorCode);
+  };
 
-req.onupgradeneeded = function (evt) {
-  console.log("openDb.onupgradeneeded");
-  var store = evt.currentTarget.result.createObjectStore(
-    DB_STORE_NAME, { keyPath: 'id', autoIncrement: true });
-  
-  store.createIndex('locationid', 'locationid', { unique: true });
-  store.createIndex('timestamp', 'timestamp', { unique: false });
-  store.createIndex('latitude', 'latitude', { unique: false });
-  store.createIndex('longitude', 'longitude', { unique: false });
-};
+  req.onupgradeneeded = function (evt) {
+    console.log("openDb.onupgradeneeded");
+    var store = evt.currentTarget.result.createObjectStore(
+      DB_STORE_NAME, { keyPath: 'id', autoIncrement: true });
+    
+    store.createIndex('locationid', 'locationid', { unique: true });
+    store.createIndex('timestamp', 'timestamp', { unique: false });
+    store.createIndex('latitude', 'latitude', { unique: false });
+    store.createIndex('longitude', 'longitude', { unique: false });
+  };
 }
 
 
@@ -73,14 +72,14 @@ function clearObjectStore(store_name) {
   };
 }
 
-function getBlob(key, store, success_callback) {
-  var req = store.get(key);
-  req.onsuccess = function(evt) {
-    var value = evt.target.result;
-    if (value)
-      success_callback(value.blob);
-  };
-}
+// function getBlob(key, store, success_callback) {
+//   var req = store.get(key);
+//   req.onsuccess = function(evt) {
+//     var value = evt.target.result;
+//     if (value)
+//       success_callback(value.blob);
+//   };
+// }
 
 /**
  * @param {IDBObjectStore=} store
@@ -166,7 +165,29 @@ function displayPubList(store) {
    */
 
 function addCoordinates(locationid, timestamp, latitude, longitude) {
+  console.log("addCoordinates arguments:", arguments);
+    var obj = { locationid, timestamp, latitude, longitude };
+    if (typeof blob != 'undefined')
+      obj.blob = blob;
+
+    var store = getObjectStore(DB_STORE_NAME, 'readwrite');
+    var req;
+    try {
+      req = store.add(obj);
+    } catch (e) {
+      if (e.name == 'DataCloneError')
+        displayActionFailure("This engine doesn't know how to clone a Blob, " +
+                             "use Firefox");
+      throw e;
+    }
+    req.onsuccess = function (evt) {
+      console.log("Insertion in DB successful");
+      displayActionSuccess();
+      displayPubList(store);
+    };
+    req.onerror = function() {
+      console.error("addPublication error", this.error);
+      displayActionFailure(this.error);
+    };
 }
 
-
-})();// Immediately-Invoked Function Expression (IIFE)
