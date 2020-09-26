@@ -13,7 +13,7 @@ const IndexPage: React.FC = () => (
       <button id="js-getLocation" >Get Location 1</button>
       <div dangerouslySetInnerHTML={{ __html: '<button onclick="getLocation()" >Get Location 2</button>' }} />
       <a href="javascript:getLocation();">Get Location 3</a>
-      <button id="js-openDB" >Get Location 1</button>
+      <button id="js-openDB" >Open DB</button>
       <div id="js-render-location"></div>
       <Image />
     </div>
