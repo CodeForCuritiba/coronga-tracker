@@ -8,8 +8,9 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
+import Header from "../Header"
 import "./layout.css"
+
 interface ILayout {
   children: Node;
 }
@@ -31,8 +32,8 @@ const Layout: React.FC = ({ children }:ILayout) => {
         style={{
           margin: `0 auto`,
           padding: `0`,
-          maxHeight: `100vh`,
-          width:`100vw`,
+          width:`100%`,
+          height: `100vh`,
           display: `flex`,
           flexDirection: `column`
         }}

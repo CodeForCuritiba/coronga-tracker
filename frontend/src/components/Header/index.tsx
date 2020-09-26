@@ -1,5 +1,7 @@
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import React from "react"
+// import Img, {GatsbyImageProps} from "gatsby-image"
+import { Logo } from "./styles"
 
 interface IHeader {
   siteTitle: string;
@@ -18,7 +20,8 @@ const Header = ({ siteTitle = `` }: IHeader) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <Logo />
+      {/* <h1 style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
@@ -28,7 +31,7 @@ const Header = ({ siteTitle = `` }: IHeader) => (
         >
           {siteTitle}
         </Link>
-      </h1>
+      </h1> */}
     </div>
   </header>
 )

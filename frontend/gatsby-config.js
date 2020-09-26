@@ -27,8 +27,17 @@ module.exports = {
         icon: `src/images/coronga-tracker-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /images/ 
+        }
+      }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
     {
       resolve: 'gatsby-plugin-load-script',
