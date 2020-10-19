@@ -18,12 +18,9 @@ const DB_NAME = 'coronga-tracker';
 const DB_VERSION = 1; // Use a long long for this value (don't use a float)
 const DB_STORE_NAME = 'geolocation';
 
-const API_URL = 'https://hxf2nx257b.execute-api.sa-east-1.amazonaws.com/prod/history';
+const API_URL = 'https://coronga.free.beeceptor.com/history';
 
 var db;
-
-// Used to keep track of which view is displayed to avoid uselessly reloading it
-var current_view_pub_key;
 
 function openDb() {
   console.log("openDb ...");
@@ -61,7 +58,7 @@ function getObjectStore(store_name, mode) {
 }
 
 function clearObjectStore(store_name) {
-  var store = getObjectStore(DB_STORE_NAME, 'readwrite');
+  var store = getObjectStore(store_name, 'readwrite');
   var req = store.clear();
   req.onsuccess = function(evt) {
     displayActionSuccess("Store cleared");
@@ -82,17 +79,14 @@ function clearObjectStore(store_name) {
    */
 
 function addCoordinates(locationid, timestamp, latitude, longitude) {
-  console.log("addCoordinates arguments:", arguments);
     var obj = { locationid, timestamp, latitude, longitude };
+    console.log("addCoordinates arguments:", obj);
 
     var store = getObjectStore(DB_STORE_NAME, 'readwrite');
     var req;
     try {
       req = store.add(obj);
     } catch (e) {
-      if (e.name == 'DataCloneError')
-        console.log("This engine doesn't know how to clone a Blob, " +
-                             "use Firefox");
       throw e;
     }
     req.onsuccess = function (evt) {
@@ -103,19 +97,70 @@ function addCoordinates(locationid, timestamp, latitude, longitude) {
     };
 }
 
-function saveCheckPoint(locationid, timestamp, latitude, longitude) {
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  fetch(API_URL, {
-    method:'POST',
-    headers: myHeaders,
-    body: {
-          id: locationid,
-          latitude,
-          longitude,
-          timestamp
-      }
-  }).then(res => {
-    console.log(res.json());
-  });
+function compareHistory() {
+  var store = getObjectStore(DB_STORE_NAME, 'readonly');
+  var req;
+  req = store.count();
+  // Requests are executed in the order in which they were made against the
+  // transaction, and their results are returned in the same order.
+
+
+  req.onsuccess = function(evt) {
+    console.log('There are ', evt.target.result)
+  }
+
+  req.onerror = function(evt) {
+    console.error('add error', this.error);
+  };
+
+  var listHistory = [];
+  var i =0;
+  req = store.openCursor();
+  req.onsuccess = function(evt) {
+    var cursor = evt.target.result;
+    // If the cursor is pointing at something, ask for the data
+    if (cursor) {
+      console.log("list cursor:", cursor);
+      req = store.get(cursor.key);
+      req.onsuccess = function (evt) {
+        var value = evt.target.result;
+        console.log('KEY', cursor.key);
+        console.log('locationid', value.locationid);
+        console.log('timestamp', value.timestamp);
+        console.log('latitude', value.latitude);
+        console.log('longitude', value.longitude);
+        listHistory.push({
+          "locationid" : value.locationid,
+          "timestamp": value.timestamp,
+          "latitude": value.latitude,
+          "longitude": value.longitude
+        });
+        console.log('list',  listHistory);
+      };
+
+      // Move on to the next object in store
+      cursor.continue();
+
+      // This counter serves only to create distinct ids
+      i++;
+    } else {
+      console.log("No more entries");
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var data = JSON.stringify({ data: listHistory });
+      // console.log('list',  listHistory);
+      fetch(API_URL, {
+        method:'POST',
+        headers: myHeaders,
+        body: data,
+      }).then(res => {
+        console.log(res.json());
+      }).catch(err => {
+        console.log(err);
+      });
+
+    }
+  };
+  
 }
