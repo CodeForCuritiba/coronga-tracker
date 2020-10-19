@@ -44,14 +44,22 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        src: 'getGeoLocation.js', // Change to the script filename
-        async: true,
+        src: "https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.1/uuidv4.min.js",
+        integrity: 'sha512-A6rEO8qzILBo+M6ga0z2JiqOyD4a2NM6NuklsFK+2K4/IXE/1lcTPKMwBoyMKVS1buj0o3ht12NijUXV8IHo0Q==',
+        crossorigin: 'anonymous',
       },
     },
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
         src: 'handleDB.js', // Change to the script filename
+        async: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: 'getGeoLocation.js', // Change to the script filename
         async: true,
       },
     },
