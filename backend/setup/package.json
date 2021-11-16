@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Abreums/coronga-tracker#readme",
   "dependencies": {
-    "aws-sdk": "^2.746.0",
+    "aws-sdk": "^2.814.0",
     "dynamodb-geo": "^0.4.0"
   },
   "description": ""
